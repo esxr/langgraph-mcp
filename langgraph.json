@@ -2,7 +2,8 @@
   "dependencies": ["."],
   "graphs": {
     "build_router_graph": "./src/langgraph_mcp/build_router_graph.py:graph",
-    "assistant_graph": "./src/langgraph_mcp/assistant_graph.py:graph"
+    "assistant_graph": "./src/langgraph_mcp/assistant_graph.py:graph",
+    "assistant_graph_with_planner": "./src/langgraph_mcp/assistant_graph_with_planner.py:graph"
   },
   "env": ".env"
 }

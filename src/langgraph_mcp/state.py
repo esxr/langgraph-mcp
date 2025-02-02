@@ -6,7 +6,8 @@ router graph.
 """
 
 from dataclasses import dataclass, field
-from typing import Annotated, Sequence
+from typing import Annotated, Sequence, Optional
+from pydantic import BaseModel
 
 from langchain_core.documents import Document
 from langchain_core.messages import AnyMessage
@@ -88,6 +89,23 @@ def add_queries(existing: Sequence[str], new: Sequence[str]) -> Sequence[str]:
     return list(existing) + list(new)
 
 
+class PlanItem(BaseModel):
+    """A task to be executed by the agent."""
+
+    expert: str = field(default="")
+    task: str = field(default="")
+    done: bool = field(default=False)
+
+
+class PlanEvaluation(BaseModel):
+    """The evaluation of the current plan."""
+
+    decision: str = field(default="")
+    plan: list[PlanItem] = field(default_factory=list)
+    next_task: int = field(default=0)
+    clarification: Optional[str] = field(default="")
+
+
 @dataclass(kw_only=True)
 class State(InputState):
     """The state of your graph / agent."""
@@ -101,3 +119,5 @@ class State(InputState):
     current_mcp_server: str = field(default="")
 
     current_tool: dict[str, str] = field(default_factory=dict)
+    current_plan: list[PlanItem] = field(default_factory=list)
+    current_task: int = field(default=0)

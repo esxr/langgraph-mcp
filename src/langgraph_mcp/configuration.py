@@ -75,6 +75,18 @@ class Configuration:
         metadata={"description": "The system prompt used for tool refining orchestration."},
     )
     
+    planner_system_prompt: str = field(
+        default=prompts.PLANNER_SYSTEM_PROMPT,
+        metadata={"description": "The system prompt used for planning."},
+    )
+
+    planner_model: Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
+        default="openai/gpt-4o",
+        metadata={
+            "description": "The language model used for planning. Should be in the form: provider/model-name."
+        },
+    )
+
     @classmethod
     def from_runnable_config(
         cls: Type[T], config: Optional[RunnableConfig] = None

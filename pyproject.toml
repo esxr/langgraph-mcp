@@ -8,7 +8,7 @@ authors = [
 ]
 license = { text = "MIT" }
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = "=3.11.11"
 dependencies = [
     "asyncio>=3.4.3",
     "langchain>=0.2.17",

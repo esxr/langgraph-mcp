@@ -1,6 +1,6 @@
 # CAP - Empowering Enterprise AI Transformation with Open Source
 This repository is part of CAP - a platform for building and deploying AI applications. It is built with LangGraph and Model Context Protocol (MCP).
-Find more about CAP at [https://cap.agaile.ai](https://cap.agaile.ai)
+Find more about CAP at [https://cap.agaile.ai](https://cap.agaile.ai).
 
 ## Building our own Universal Assistant: with LangGraph and Model Context Protocol (MCP)
 

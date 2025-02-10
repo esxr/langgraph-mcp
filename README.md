@@ -1,4 +1,8 @@
-# Building our own Universal Assistant: with LangGraph and Model Context Protocol (MCP)
+# CAP - Empowering Enterprise AI Transformation with Open Source
+This repository is part of CAP - a platform for building and deploying AI applications. It is built with LangGraph and Model Context Protocol (MCP).
+Find more about CAP at [https://cap.agaile.ai](https://cap.agaile.ai)
+
+## Building our own Universal Assistant: with LangGraph and Model Context Protocol (MCP)
 
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. Whether you're building an AI-powered IDE, enhancing a chat interface, or creating custom AI workflows, MCP provides a standardized way to connect LLMs with the context they need. Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect your devices to various peripherals and accessories, MCP provides a standardized way to connect AI models to different data sources and tools.
 

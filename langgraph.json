@@ -5,6 +5,7 @@
     "RUN python3 -m venv .venv && pip install --upgrade pip && pip install uv",
     "COPY openapi-mcp-server /openapi-mcp-server"
   ],
+  "python_version": "3.12",
   "dependencies": ["."],
   "graphs": {
     "build_router_graph": "./src/langgraph_mcp/build_router_graph.py:graph",

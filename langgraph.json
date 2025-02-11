@@ -1,4 +1,9 @@
 {
+  "dockerfile_lines": [
+    "RUN apt-get update && apt-get install -y curl git ca-certificates && rm -rf /var/lib/apt/lists/*",
+    "RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install -y nodejs",
+    "RUN python3 -m venv .venv && pip install --upgrade pip && pip install uv"
+  ],
   "dependencies": ["."],
   "graphs": {
     "build_router_graph": "./src/langgraph_mcp/build_router_graph.py:graph",

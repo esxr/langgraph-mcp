@@ -128,7 +128,7 @@ celerybeat.pid
 
 # Environments
 mcp-servers-config.json
-.mcp-servers-config.json
+.mcp-servers-config*
 .env
 .venv
 env/

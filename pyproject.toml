@@ -8,7 +8,7 @@ authors = [
 ]
 license = { text = "MIT" }
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "asyncio>=3.4.3",
     "langchain>=0.2.17",
@@ -17,7 +17,9 @@ dependencies = [
     "langchain-openai>=0.2.11",
     "langgraph>=0.2.56",
     "mcp>=1.0.0",
+    "langchain-community",
     "openai>=1.57.0",
+    "openapi_pydantic>=0.5.1",
     "python-dotenv>=1.0.1"
 ]
 

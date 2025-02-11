@@ -1,8 +1,13 @@
+
 # CAP - Empowering Enterprise AI Transformation with Open Source
 This repository is part of CAP - a platform for building and deploying AI applications. It is built with LangGraph and Model Context Protocol (MCP).
 Find more about CAP at [https://cap.agaile.ai](https://cap.agaile.ai).
 
 ## Building our own Universal Assistant: with LangGraph and Model Context Protocol (MCP)
+=======
+# Universal Assistant built with LangGraph and Model Context Protocol (MCP)
+
+![langgraph-mcp-openapi-usecases mp4](https://github.com/user-attachments/assets/73d44e87-e77c-4dae-a602-72261b2f6a47)
 
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. Whether you're building an AI-powered IDE, enhancing a chat interface, or creating custom AI workflows, MCP provides a standardized way to connect LLMs with the context they need. Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect your devices to various peripherals and accessories, MCP provides a standardized way to connect AI models to different data sources and tools.
 
@@ -10,13 +15,45 @@ Find more about CAP at [https://cap.agaile.ai](https://cap.agaile.ai).
 
 In [this earlier article](https://medium.com/@pranavdhoolia/building-and-deploying-a-virtual-assistant-with-langgraph-5c68dabd82db) we enhanced LangGraph's retrieval agent template to develop and deploy an AI solution.
 
-In this work, we combine LangGraph with MCP to build our own Universal Assistant. For our universal assistant we implement a multi-agent pattern as follows:
+In this project, we combine LangGraph with MCP to build our own Universal Assistant. For our universal assistant we implement a multi-agent pattern as follows:
 
 ![Basic assistant flow](media/assistant-flow.excalidraw.png)
 
 Assistant receives the user message and decides the agent to use. The agent node decides the right tool to use, and calls the tool on the MCP server. Since all our agents are based on MCP, a single MCP-Agent node is sufficient for LLM based orchestraion, and another single node is sufficient to work with MCP servers to invoke their tools.
 
-## Our Implementation Walk-thru
+
+## Development Setup
+
+1.  Create and activate a virtual environment
+    ```bash
+    git clone https://github.com/esxr/langgraph-mcp.git
+    cd langgraph-mcp
+    python3 -m venv .venv
+    source .venv/bin/activate
+    ```
+
+2.  Install Langgraph CLI
+    ```bash
+    pip install -U "langgraph-cli[inmem]"
+    ```
+    Note: "inmem" extra(s) are needed to run LangGraph API server in development mode (without requiring Docker installation)
+
+3.  Install the dependencies
+    ```bash
+    pip install -e .
+    ```
+
+4.  Configure environment variables
+    ```bash
+    cp env.example .env
+    ```
+
+    Add your `OPENAI_API_KEY`, `GITHUB_PERSONAL_ACCESS_TOKEN` etc. to the `.env`
+
+    **Note**: We have added support for *Milvus Lite Retriever* (support file based URI). Milvus Lite won't work on Windows. For Windows you may need to use Milvus Server (Easy to start using Docker), and change the `MILVUS_DB` config to the server based URI. You may also enhance the [retriever.py](src/langgraph_mcp/retriever.py) to add retrievers for your choice of vector databases!
+
+
+## Implementation Details
 
 There are 3 main parts to our implementation:
 1. Building the Router
@@ -73,36 +110,6 @@ The assistant graph is implemented in [`assistant_graph.py`](src/langgraph_mcp/a
     - Delegates the actual operation to the provided `MCPSessionFunction` instance via `await fn(server_name, session)`.
 4.  Extensibility:
     - New operations can be added by subclassing `MCPSessionFunction` without modifying the cor    e processor logic. for e.g. we should be able to add support for getting tools and executing tools using this pattern.
-
-## Setting it up
-
-1.  Create and activate a virtual environment
-    ```bash
-    git clone https://github.com/esxr/langgraph-mcp.git
-    cd langgraph-mcp
-    python3 -m venv .venv
-    source .venv/bin/activate
-    ```
-
-2.  Install Langgraph CLI
-    ```bash
-    pip install -U "langgraph-cli[inmem]"
-    ```
-    Note: "inmem" extra(s) are needed to run LangGraph API server in development mode (without requiring Docker installation)
-
-3.  Install the dependencies
-    ```bash
-    pip install -e .
-    ```
-
-4.  Configure environment variables
-    ```bash
-    cp env.example .env
-    ```
-
-    Add your `OPENAI_API_KEY`, `GITHUB_PERSONAL_ACCESS_TOKEN` etc. to the `.env`
-
-    **Note**: We have added support for *Milvus Lite Retriever* (support file based URI). Milvus Lite won't work on Windows. For Windows you may need to use Milvus Server (Easy to start using Docker), and change the `MILVUS_DB` config to the server based URI. You may also enhance the [retriever.py](src/langgraph_mcp/retriever.py) to add retrievers for your choice of vector databases!
 
 ## A Demonstration!
 

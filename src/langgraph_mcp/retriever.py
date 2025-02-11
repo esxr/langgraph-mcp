@@ -39,9 +39,11 @@ def make_milvus_retriever(
     """Configure this agent to use milvus lite file based uri to store the vector index."""
     from langchain_milvus.vectorstores import Milvus
 
+    uri = os.environ["MILVUS_DB"]
     vstore = Milvus (
         embedding_function=embedding_model,
-        connection_args={"uri": os.environ["MILVUS_DB"]}
+        connection_args={"uri": uri},
+        index_params=None if uri.startswith("http") else {"index_type": "FLAT", "metric_type": "L2", "params": {}}
     )
     yield vstore.as_retriever()
 
